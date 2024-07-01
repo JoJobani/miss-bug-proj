@@ -5,9 +5,10 @@ import {bugService} from "./services/bug.service.js"
 
 
 const app = express()
+app.listen(3030, () => console.log('Server ready at port 3030'))
 
-// app.use(cookieParser())
-// app.use(express.static('public'))
+app.use(cookieParser())
+app.use(express.static('public'))
 
 app.get('/', (req, res) => res.redirect('/api/bug'))
 
@@ -53,13 +54,3 @@ app.get('api/bug/:bugId/remove',(req,res) => {
             res.status(500).send('cannot remove bug')
         })
 })
-
-
-
-
-
-
-
-
-
-app.listen(3030, () => console.log('Server ready at port 3030'))

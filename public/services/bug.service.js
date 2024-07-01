@@ -1,10 +1,10 @@
+// import { storageService } from './async-storage.service.js'
+// import { utilService } from './util.service.js'
 
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
+// const STORAGE_KEY = 'bugDB'
+const BASE_URL = '/api/bug/'
 
-const STORAGE_KEY = 'bugDB'
-
-_createBugs()
+// _createBugs()
 
 export const bugService = {
     query,
@@ -13,57 +13,56 @@ export const bugService = {
     remove,
 }
 
-
-function query() {
-    return storageService.query(STORAGE_KEY)
+function query(filterBy = {}) {
+    return axios.get(BASE_URL, { params: filterBy })
+        .then(res => res.data)
 }
 function getById(bugId) {
-    return storageService.get(STORAGE_KEY, bugId)
+    return axios.get(BASE_URL + bugId)
+        .then(res => res.data)
 }
 
 function remove(bugId) {
-    return storageService.remove(STORAGE_KEY, bugId)
+    return axios.get(BASE_URL + bugId + '/remove')
+        .then(res => res.data)
 }
 
 function save(bug) {
-    if (bug._id) {
-        return storageService.put(STORAGE_KEY, bug)
-    } else {
-        return storageService.post(STORAGE_KEY, bug)
-    }
+    const url = BASE_URL + 'save'
+    let queryParams = `?title=${bug.title}&severity=${bug.severity}`
+    if (bug._id) queryParams += `&_id=${bug._id}`
+    return axios.get(url + queryParams).then(res => res.data)
 }
 
-
-
-
-function _createBugs() {
-    let bugs = utilService.loadFromStorage(STORAGE_KEY)
-    if (!bugs || !bugs.length) {
-        bugs = [
-            {
-                title: "Infinite Loop Detected",
-                severity: 4,
-                _id: "1NF1N1T3"
-            },
-            {
-                title: "Keyboard Not Found",
-                severity: 3,
-                _id: "K3YB0RD"
-            },
-            {
-                title: "404 Coffee Not Found",
-                severity: 2,
-                _id: "C0FF33"
-            },
-            {
-                title: "Unexpected Response",
-                severity: 1,
-                _id: "G0053"
-            }
-        ]
-        utilService.saveToStorage(STORAGE_KEY, bugs)
-    }
-
-
-
-}
+// function _createBugs() {
+//     let bugs = utilService.loadFromStorage(STORAGE_KEY)
+//     if (!bugs || !bugs.length) {
+//         bugs = [
+//             {
+//                 title: "Infinite Loop Detected",
+//                 severity: 4,
+//                 _id: "1NF1N1T3",
+//                 description: "bla bla"
+//             },
+//             {
+//                 title: "Keyboard Not Found",
+//                 severity: 3,
+//                 _id: "K3YB0RD",
+//                 description: "bla bla"
+//             },
+//             {
+//                 title: "404 Coffee Not Found",
+//                 severity: 2,
+//                 _id: "C0FF33",
+//                 description: "bla bla"
+//             },
+//             {
+//                 title: "Unexpected Response",
+//                 severity: 1,
+//                 _id: "G0053",
+//                 description: "bla bla"
+//             }
+//         ]
+//         utilService.saveToStorage(STORAGE_KEY, bugs)
+//     }
+// }
