@@ -16,7 +16,7 @@ export function BugDetails() {
                 setBug(bug)
             })
             .catch(err => {
-                showErrorMsg('Cannot load bug')
+                showErrorMsg(err)
             })
     }, [])
 

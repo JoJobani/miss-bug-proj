@@ -21,6 +21,7 @@ function query(filterBy = {}) {
 function getById(bugId) {
     return axios.get(BASE_URL + bugId)
         .then(res => res.data)
+        .catch(err => console.log('caught: ' + err))
 }
 
 function remove(bugId) {
