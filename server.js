@@ -11,7 +11,11 @@ app.use(cookieParser())
 app.use(express.static('public'))
 
 app.get('/api/bug', (req, res) => {
-    bugService.query()
+    const filterBy = {
+        title: req.query.title,
+        severity: +req.query.severity
+    }
+    bugService.query(filterBy)
         .then(bugs => res.send(bugs))
         .catch(err => {
             console.error('cannot get bugs',err)
