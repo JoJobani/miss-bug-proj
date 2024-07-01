@@ -6,8 +6,60 @@ import {bugService} from "./services/bug.service.js"
 
 const app = express()
 
-app.use(cookieParser())
-app.use(express.static('public'))
+// app.use(cookieParser())
+// app.use(express.static('public'))
 
-app.get('/', (req, res) => res.send('Hello there'))
+app.get('/', (req, res) => res.redirect('/api/bug'))
+
+app.get('/api/bug', (req, res) => {
+    bugService.query()
+        .then(bugs => res.send(bugs))
+        .catch(err => {
+            console.error('cannot get bugs',err)
+            res.status(500).send('cannot get bugs')
+        })
+})
+
+app.get('/api/bug/save', (req,res) => {
+    const bugToSave = {
+        _id: req.query._id,
+        title: req.query.title,
+        severity: +req.query.severity
+    }
+    bugService.save(bugToSave)
+        .then(bug => res.send(bug))
+        .catch(err => {
+            console.error('cannot save bug', err)
+            res.status(500).send('cannot save bug')
+        })
+})
+
+app.get('api/bug/:bugId',(req,res) => {
+    const {bugId} = req.params
+    bugService.getById(bugId)
+        .then(bug => res.send(bug))
+        .catch(err => {
+            console.error('cannot get bug',err)
+            res.status(500).send('cannot get bug')
+        })
+})
+
+app.get('api/bug/:bugId/remove',(req,res) => {
+    const {bugId} = req.params
+    bugService.remove(bugId)
+        .then(() => res.send(`bug ${bugId} removed!`))
+        .catch(err => {
+            console.error('cannot remove bug',err)
+            res.status(500).send('cannot remove bug')
+        })
+})
+
+
+
+
+
+
+
+
+
 app.listen(3030, () => console.log('Server ready at port 3030'))
