@@ -79,7 +79,6 @@ export function BugIndex() {
     return (
         <main>
             <section className='info-actions'>
-                <h3>Bugs App</h3>
                 <button onClick={onAddBug}>Add Bug ⛐</button>
                 <BugFilter filterBy={filterBy} onSetFilter={onSetFilter} />
             </section>

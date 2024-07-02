@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 body {
     margin: auto;
     font-size: 20px;
@@ -21,7 +25,7 @@ header {
 main {
     flex-grow: 1;
     text-align: center;
-
+    background-color: wheat;
 }
 
 footer {
@@ -77,7 +81,6 @@ nav a:hover {
     background-color: rgb(216, 59, 59);
 }
 
-
 .bug-list {
     list-style: none;
     padding: 0;
@@ -91,9 +94,10 @@ nav a:hover {
     background-color: #333;
     color: whitesmoke;
     border-radius: .2em;
-    margin: 5px;
+    margin: 10px;
     text-align: center;
-    padding: 5px;
+    padding: 10px;
+    min-width: 200px;
 }
 
 .bug-preview a {
@@ -105,8 +109,30 @@ nav a:hover {
 }
 
 .info-actions {
+    width: 100%;
+    background-color: antiquewhite;
+    padding: 10px;
+    min-width: 200px;
+}
+
+.bug-filter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bug-filter form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    gap: 5px;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding-inline: 8rem;
 }
