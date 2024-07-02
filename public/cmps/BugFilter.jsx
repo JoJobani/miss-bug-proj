@@ -46,10 +46,8 @@ export function BugFilter({ filterBy, onSetFilter }) {
                 <label htmlFor="title">Name</label>
                 <input value={title} onChange={handleChange} name="title" type="text" id="title" />
 
-                <label htmlFor="severity">Min Severity</label>
-                <input value={severity || ''} onChange={handleChange} name="severity" type="number" id="severity" />
-
-                <button>Submit</button>
+                <label htmlFor="severity">Min Severity: {severity}</label>
+                <input value={severity} onChange={handleChange} name="severity" type="range" id="severity" min={0} max={5}/>
             </form>
         </section>
     )
