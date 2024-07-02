@@ -20,7 +20,26 @@ export function BugIndex() {
     }
 
     function onSetFilter(filterBy) {
-        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+        setFilterBy(prevFilter => {
+            let nextPageIdx
+            if (prevFilter.pageIdx !== undefined) nextPageIdx = 0
+            return { ...prevFilter, ...filterBy, pageIdx: nextPageIdx }
+        })
+    }
+
+    function togglePagination() {
+        setFilterBy(prevFilter => {
+            return { ...prevFilter, pageIdx: prevFilter.pageIdx === undefined ? 0 : undefined }
+        })
+    }
+
+    function onChangePage(diff) {
+        if (filterBy.pageIdx === undefined) return
+        setFilterBy(prevFilter => {
+            let nextPageIdx = prevFilter.pageIdx + diff
+            if (nextPageIdx < 0) nextPageIdx = 0
+            return { ...prevFilter, pageIdx: nextPageIdx }
+        })
     }
 
     function onRemoveBug(bugId) {
@@ -76,11 +95,19 @@ export function BugIndex() {
             })
     }
 
+    if (!bugs) return <div>Loading...</div>
+
     return (
         <main>
             <section className='info-actions'>
-                <button onClick={onAddBug}>Add Bug ⛐</button>
+                <button onClick={onAddBug}>🐛 Add Bug 🐛</button>
                 <BugFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+                <section className='pagination'>
+                    <button onClick={togglePagination} >Toggle Pagination</button>
+                    <button onClick={() => onChangePage(-1)}>-</button>
+                    {filterBy.pageIdx + 1 || 'No Pagination'}
+                    <button onClick={() => onChangePage(1)}>+</button>
+                </section>
             </section>
             <main>
                 <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
