@@ -109,9 +109,7 @@ export function BugIndex() {
                     <button onClick={() => onChangePage(1)}>+</button>
                 </section>
             </section>
-            <main>
-                <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
-            </main>
+            <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
         </main>
     )
 }

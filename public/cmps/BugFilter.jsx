@@ -43,8 +43,7 @@ export function BugFilter({ filterBy, onSetFilter }) {
         <section className="bug-filter">
             <h2>Filter bugs:</h2>
             <form onSubmit={onSubmitFilter}>
-                <label htmlFor="title">Name</label>
-                <input value={title} onChange={handleChange} name="title" type="text" id="title" />
+                <input placeholder={'Search keywords...'} value={title} onChange={handleChange} name="title" type="text" id="title" />
 
                 <label htmlFor="severity">Min Severity: {severity}</label>
                 <input value={severity} onChange={handleChange} name="severity" type="range" id="severity" min={0} max={5}/>

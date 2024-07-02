@@ -13,14 +13,12 @@ export function App() {
         <Router>
             <div className='main-app'>
                 <AppHeader />
-                <main className='container'>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/bug" element={<BugIndex />} />
-                        <Route path="/bug/:bugId" element={<BugDetails />} />
-                        <Route path="/about" element={<AboutUs />} />
-                    </Routes>
-                </main>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/bug" element={<BugIndex />} />
+                    <Route path="/bug/:bugId" element={<BugDetails />} />
+                    <Route path="/about" element={<AboutUs />} />
+                </Routes>
                 <AppFooter />
             </div>
         </Router>
