@@ -32,5 +32,5 @@ function save(bug) {
 }
 
 function getDefaultFilter() {
-    return { title: '', severity: 0 }
+    return { txt: '', severity: 0 }
 }

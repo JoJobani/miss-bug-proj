@@ -14,7 +14,7 @@ app.use(express.json())
 //GET BUGS
 app.get('/api/bug', (req, res) => {
     const filterBy = {
-        title: req.query.title,
+        txt: req.query.txt,
         severity: +req.query.severity,
         pageIdx: req.query.pageIdx
     }

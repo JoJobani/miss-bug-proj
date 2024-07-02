@@ -37,16 +37,16 @@ export function BugFilter({ filterBy, onSetFilter }) {
         onSetFilter(filterByToEdit)
     }
 
-    const { title, severity } = filterByToEdit
+    const { txt, severity } = filterByToEdit
 
     return (
         <section className="bug-filter">
             <h2>Filter bugs:</h2>
             <form onSubmit={onSubmitFilter}>
-                <input placeholder={'Search keywords...'} value={title} onChange={handleChange} name="title" type="text" id="title" />
+                <input placeholder={'Search for name or labels...'} value={txt} onChange={handleChange} name="txt" type="text" id="txt" />
 
                 <label htmlFor="severity">Min Severity: {severity}</label>
-                <input value={severity} onChange={handleChange} name="severity" type="range" id="severity" min={0} max={5}/>
+                <input value={severity} onChange={handleChange} name="severity" type="range" id="severity" min={0} max={5} />
             </form>
         </section>
     )
