@@ -9,7 +9,9 @@ app.listen(3030, () => console.log('Server ready at port 3030'))
 
 app.use(cookieParser())
 app.use(express.static('public'))
+app.use(express.json())
 
+//GET BUGS
 app.get('/api/bug', (req, res) => {
     const filterBy = {
         title: req.query.title,
@@ -23,7 +25,22 @@ app.get('/api/bug', (req, res) => {
         })
 })
 
-app.get('/api/bug/save', (req, res) => {
+//ADD BUG
+app.post('/api/bug', (req, res) => {
+    const bugToSave = {
+        title: req.query.title,
+        severity: +req.query.severity
+    }
+    bugService.save(bugToSave)
+        .then(bug => res.send(bug))
+        .catch(err => {
+            console.error('cannot save bug', err)
+            res.status(500).send('cannot save bug')
+        })
+})
+
+//UPDATE BUG
+app.put('/api/bug', (req, res) => {
     const bugToSave = {
         _id: req.query._id,
         title: req.query.title,
@@ -37,6 +54,7 @@ app.get('/api/bug/save', (req, res) => {
         })
 })
 
+//GET BUG
 app.get('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
 
@@ -57,7 +75,8 @@ app.get('/api/bug/:bugId', (req, res) => {
         })
 })
 
-app.get('/api/bug/:bugId/remove', (req, res) => {
+//REMOVE BUG
+app.delete('/api/bug/:bugId', (req, res) => {
     const { bugId } = req.params
     bugService.remove(bugId)
         .then(() => res.send(`bug ${bugId} removed!`))

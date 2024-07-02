@@ -1,9 +1,9 @@
 [
     {
         "_id": "abc123",
-        "title": "Cannot save a new bug",
-        "description": "problem when writing code",
-        "severity": 4,
+        "title": "Cannot save a new car",
+        "description": "problem when clicking Save",
+        "severity": 3,
         "createdAt": 1542107359454
     },
     {
