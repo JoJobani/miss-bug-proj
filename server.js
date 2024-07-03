@@ -28,11 +28,13 @@ app.get('/api/bug', (req, res) => {
 
 //ADD BUG
 app.post('/api/bug', (req, res) => {
+    const { title, description, severity, createdAt, labels } = req.body
     const bugToSave = {
-        title: req.body.title,
-        severity: +req.body.severity,
-        description: req.body.description,
-        labels: req.body.labels
+        title: title || '',
+        description: description || '',
+        severity: +severity || 0,
+        createdAt: +createdAt || 0,
+        labels: labels || []
     }
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
@@ -44,12 +46,14 @@ app.post('/api/bug', (req, res) => {
 
 //UPDATE BUG
 app.put('/api/bug', (req, res) => {
+    const { _id, title, description, severity, createdAt, labels } = req.body
     const bugToSave = {
-        _id: req.body._id || '',
-        title: req.body.title || '',
-        severity: +req.body.severity || 0,
-        description: req.body.description || '',
-        labels: req.body.labels || []
+        _id,
+        title: title || '',
+        description: description || '',
+        severity: +severity || 0,
+        createdAt: +createdAt || 0,
+        labels: labels || []
     }
     bugService.save(bugToSave)
         .then(bug => res.send(bug))

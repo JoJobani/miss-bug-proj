@@ -1,20 +1,10 @@
 [
     {
-        "title": "blob",
-        "severity": 3,
-        "description": "none",
-        "labels": [
-            "critical",
-            "dev-branch"
-        ],
-        "_id": "scpbo",
-        "createdAt": 1719988400781
-    },
-    {
         "_id": "abc123",
         "title": "Cannot save a new car",
-        "severity": 4,
         "description": "problem when clicking Save",
+        "severity": 4,
+        "createdAt": 1542107359454,
         "labels": [
             "critical",
             "need-CR"

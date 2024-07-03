@@ -112,6 +112,10 @@ nav a:hover {
     min-width: 200px;
 }
 
+.bug-preview button{
+    margin: 5px;
+}
+
 .bug-preview a {
     color: lightskyblue;
 }

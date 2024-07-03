@@ -58,16 +58,23 @@ export function BugIndex() {
     }
 
     function onAddBug() {
+        const title = prompt('Bug title?')
+        const description = prompt('Bug description?')
+        const severity = +prompt('Bug severity?')
+        const labelsInput = prompt('Bug labels (comma-separated)?')
+        const labels = labelsInput ? labelsInput.split(',').map(lbl => lbl.trim()) : []
+
         const bug = {
-            title: prompt('Bug title?'),
-            severity: +prompt('Bug severity?'),
-            description: prompt('Description?'),
-            labels: ['critical','dev-branch']
+            title,
+            description,
+            severity,
+            labels
         }
+
         bugService
             .save(bug)
             .then((savedBug) => {
-                setBugs([...bugs, savedBug])
+                setBugs(prevBugs => {[...prevBugs, savedBug]})
                 showSuccessMsg('Bug added')
             })
             .catch((err) => {
@@ -95,8 +102,6 @@ export function BugIndex() {
             })
     }
 
-    if (!bugs) return <div>Loading...</div>
-
     return (
         <main>
             <section className='info-actions'>
@@ -109,7 +114,10 @@ export function BugIndex() {
                     <button onClick={() => onChangePage(1)}>+</button>
                 </section>
             </section>
-            <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
-        </main>
+            <h3>List of bugs:</h3>
+            {bugs && bugs.length
+                ? <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
+                : <h1>no bugs today</h1>
+            }        </main>
     )
 }
