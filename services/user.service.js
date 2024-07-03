@@ -46,7 +46,7 @@ function save(user) {
     user._id = utilService.makeId()
     users.push(user)
 
-    return _saveUsersToFile
+    return _saveUsersToFile()
         .then(() => ({
             _id: user._id,
             fullname: user.fullname,
