@@ -1,7 +1,6 @@
 {
   "name": "miss-bug-proj",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "set SECRET1=supersecret & nodemon --ignore \"./data\" server.js",
