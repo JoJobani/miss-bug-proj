@@ -30,16 +30,20 @@ function query(filterBy = {}) {
         })
 }
 
-function save(bugToSave) {
-    if (bugToSave._id) {
-        const bugIdx = bugs.findIndex(bug => bug._id === bugToSave._id)
-        bugs[bugIdx] = bugToSave
+function save(bug, loggedUser) {
+    if (bug._id) {
+        const bugToUpdate = bugs.find(currBug => currBug._id === bug._id)
+        if (!loggedUser.isAdmin && bugToUpdate.creator._id !== loggedUser._id) {
+            return Promise.reject('Not your bug')
+        }
+        bugToUpdate.severity = bug.severity
     } else {
-        bugToSave._id = utilService.makeId()
-        bugToSave.createdAt = Date.now()
-        bugs.unshift(bugToSave)
+        bug._id = utilService.makeId()
+        bug.creator = loggedUser
+        bugs.push(bug)
     }
-    return _saveBugsToFile().then(() => bugToSave)
+    return _saveBugsToFile()
+        .then(() => bug)
 }
 
 function getById(bugId) {
@@ -48,11 +52,14 @@ function getById(bugId) {
     return Promise.resolve(bug)
 }
 
-function remove(bugId) {
+function remove(bugId, loggedUser) {
     const bugIdx = bugs.findIndex(bug => bug._id === bugId)
-    if (bugIdx < 0) return Promise.reject('cannot find bug' + bugId)
+    if (bugIdx === -1) return Promise.reject('cannot find bug')
+    if (!loggedUser.isAdmin && bugToUpdate.creator._id !== loggedUser._id) {
+        return Promise.reject('Not your bug')
+    }
     bugs.splice(bugIdx, 1)
-    return _saveBugsToFile().then(() => `bug (${bugId}) removed!`)
+    return _saveBugsToFile()
 }
 
 function _saveBugsToFile() {

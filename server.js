@@ -39,7 +39,7 @@ app.post('/api/bug', (req, res) => {
         createdAt: +createdAt || 0,
         labels: labels || []
     }
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, loggedUser)
         .then(bug => res.send(bug))
         .catch(err => {
             console.log('cannot save bug', err)
@@ -60,7 +60,7 @@ app.put('/api/bug', (req, res) => {
         createdAt: +createdAt || 0,
         labels: labels || []
     }
-    bugService.save(bugToSave)
+    bugService.save(bugToSave, loggedUser)
         .then(bug => res.send(bug))
         .catch(err => {
             console.log('cannot save bug', err)
@@ -89,8 +89,11 @@ app.get('/api/bug/:bugId', (req, res) => {
 })
 
 app.delete('/api/bug/:bugId', (req, res) => {
+    const loggedUser = userService.validateToken(req.cookies.loginToken)
+    if (!loggedUser) return res.status(401).send('Cannot remove bug')
+
     const { bugId } = req.params
-    bugService.remove(bugId)
+    bugService.remove(bugId, loggedUser)
         .then(() => res.send(`bug ${bugId} removed!`))
         .catch(err => {
             console.log('cannot remove bug', err)
