@@ -5,7 +5,6 @@ import { bugService } from "./services/bug.service.js"
 import { userService } from './services/user.service.js'
 
 const app = express()
-app.listen(3030, () => console.log('Server ready at port 3030'))
 
 //Express config
 app.use(cookieParser())
@@ -155,3 +154,6 @@ app.post('/api/auth/logout', (req, res) => {
     res.clearCookie('loginToken')
     res.send('Logged out')
 })
+
+const PORT = process.env.PORT || 3030
+app.listen(PORT, () => console.log('Server ready at port 3030'))
