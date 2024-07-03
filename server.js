@@ -154,8 +154,3 @@ app.post('/api/auth/logout', (req, res) => {
     res.clearCookie('loginToken')
     res.send('Logged out')
 })
-
-// Fallback route
-app.get('/**', (req, res) => {
-    res.sendFile(path.resolve('public/index.html'))
-})
