@@ -3,8 +3,7 @@
     "_id": "u101",
     "username": "puki",
     "fullname": "Puki Ja",
-    "password": "secret1",
-    "isAdmin": true
+    "password": "secret1"
   },
   {
     "_id": "u102",
@@ -17,5 +16,12 @@
     "username": "kiki",
     "fullname": "Kiki Ki",
     "password": "kiki"
+  },
+  {
+    "_id": "u100",
+    "username": "admin",
+    "fullname": "Jonathan",
+    "password": "admin",
+    "isAdmin": true
   }
 ]
