@@ -23,11 +23,5 @@
     "fullname": "Jonathan",
     "password": "admin",
     "isAdmin": true
-  },
-  {
-    "username": "bob",
-    "fullname": "bobber bob",
-    "password": "123",
-    "_id": "i75dz"
   }
 ]
