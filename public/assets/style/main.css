@@ -16,6 +16,17 @@ header {
     align-items: center;
 }
 
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home img{
+    max-width: 300px;
+}
+
 .main-app {
     display: flex;
     flex-direction: column;
