@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 import { BugPreview } from './BugPreview.jsx'
 import { userService } from '../services/user.service.js'
 
-export function BugList({ bugs, onRemoveBug, onEditBug }) {
+export function BugList({ bugs, onRemoveBug, onEditBug, showControls }) {
 
     const user = userService.getLoggedUser()
 
@@ -20,7 +20,7 @@ export function BugList({ bugs, onRemoveBug, onEditBug }) {
                     <BugPreview bug={bug} />
                     <Link to={`/bug/${bug._id}`}>Details</Link>
                     {
-                        isOwner(bug) &&
+                        isOwner(bug) && (showControls) &&
                         <section className='bug-controls'>
                             <button onClick={() => onRemoveBug(bug._id)}>x</button>
                             <button onClick={() => onEditBug(bug)}>Edit</button>

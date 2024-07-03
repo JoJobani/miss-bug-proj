@@ -26,6 +26,9 @@ function query(filterBy = {}) {
                 const startIdx = filterBy.pageIdx * PAGE_SIZE
                 bugs = bugs.slice(startIdx, startIdx + PAGE_SIZE)
             }
+            if (filterBy.creatorId){
+                bugs = bugs.filter(bug => bug.creator._id === filterBy.creatorId)
+            }
             return bugs
         })
 }

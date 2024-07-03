@@ -17,7 +17,8 @@ app.get('/api/bug', (req, res) => {
     const filterBy = {
         txt: req.query.txt,
         severity: +req.query.severity,
-        pageIdx: req.query.pageIdx
+        pageIdx: req.query.pageIdx,
+        creatorId: req.query.creatorId
     }
     bugService.query(filterBy)
         .then(bugs => res.send(bugs))

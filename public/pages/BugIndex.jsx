@@ -116,7 +116,12 @@ export function BugIndex() {
             </section>
             <h3>List of bugs:</h3>
             {bugs && bugs.length
-                ? <BugList bugs={bugs} onRemoveBug={onRemoveBug} onEditBug={onEditBug} />
+                ? <BugList 
+                bugs={bugs} 
+                onRemoveBug={onRemoveBug} 
+                onEditBug={onEditBug} 
+                showControls={true}
+                />
                 : <h1>no bugs today</h1>
             }        </main>
     )
