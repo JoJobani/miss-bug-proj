@@ -29,8 +29,10 @@ app.get('/api/bug', (req, res) => {
 //ADD BUG
 app.post('/api/bug', (req, res) => {
     const bugToSave = {
-        title: req.query.title,
-        severity: +req.query.severity
+        title: req.body.title,
+        severity: +req.body.severity,
+        description: req.body.description,
+        labels: req.body.labels
     }
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
@@ -43,9 +45,11 @@ app.post('/api/bug', (req, res) => {
 //UPDATE BUG
 app.put('/api/bug', (req, res) => {
     const bugToSave = {
-        _id: req.query._id,
-        title: req.query.title,
-        severity: +req.query.severity
+        _id: req.body._id || '',
+        title: req.body.title || '',
+        severity: +req.body.severity || 0,
+        description: req.body.description || '',
+        labels: req.body.labels || []
     }
     bugService.save(bugToSave)
         .then(bug => res.send(bug))
@@ -63,7 +67,7 @@ app.get('/api/bug/:bugId', (req, res) => {
     if (!visitedBugs.includes(bugId)) visitedBugs.push(bugId)
     res.cookie('visitedBugs', visitedBugs, { maxAge: 7 * 1000 })
     console.log(visitedBugs)
-    if (visitedBugs.length > 3){
+    if (visitedBugs.length > 3) {
         return res.status(401).send('Wait for a bit')
     }
 

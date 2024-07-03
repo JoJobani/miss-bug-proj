@@ -2,10 +2,12 @@
     {
         "_id": "abc123",
         "title": "Cannot save a new car",
+        "severity": 4,
         "description": "problem when clicking Save",
-        "severity": 3,
-        "createdAt": 1542107359454,
-        "labels" : ["critical", "need-CR"]
+        "labels": [
+            "critical",
+            "need-CR"
+        ]
     },
     {
         "_id": "1NF1N1T3",
@@ -13,7 +15,10 @@
         "description": "problem when writing code",
         "severity": 4,
         "createdAt": 1542107359454,
-        "labels" : ["critical", "dev-branch"]
+        "labels": [
+            "critical",
+            "dev-branch"
+        ]
     },
     {
         "_id": "K3YB0RD",
@@ -21,7 +26,10 @@
         "description": "problem when using site",
         "severity": 3,
         "createdAt": 1542107359454,
-        "labels" : [ "need-CR", "dev-branch"]
+        "labels": [
+            "need-CR",
+            "dev-branch"
+        ]
     },
     {
         "_id": "C0FF33",
@@ -29,7 +37,11 @@
         "description": "problem in general",
         "severity": 2,
         "createdAt": 1542107359454,
-        "labels" : ["critical", "need-CR", "dev-branch"]
+        "labels": [
+            "critical",
+            "need-CR",
+            "dev-branch"
+        ]
     },
     {
         "_id": "G0053",
@@ -37,6 +49,8 @@
         "description": "problem when clicking anything",
         "severity": 1,
         "createdAt": 1542107359454,
-        "labels" : ["dev-branch"]
+        "labels": [
+            "dev-branch"
+        ]
     }
 ]

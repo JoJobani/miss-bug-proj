@@ -11,7 +11,7 @@ export function BugIndex() {
 
     useEffect(() => {
         loadBugs()
-    }, [filterBy])
+    }, [filterBy,bugs])
 
     function loadBugs() {
         bugService.query(filterBy)
@@ -61,12 +61,12 @@ export function BugIndex() {
         const bug = {
             title: prompt('Bug title?'),
             severity: +prompt('Bug severity?'),
-            description: prompt('Description?')
+            description: prompt('Description?'),
+            labels: ['critical','dev-branch']
         }
         bugService
             .save(bug)
             .then((savedBug) => {
-                console.log('Added Bug', savedBug)
                 setBugs([...bugs, savedBug])
                 showSuccessMsg('Bug added')
             })
